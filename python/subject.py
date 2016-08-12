@@ -239,6 +239,58 @@ def test12():
         t[k] = int(v)
     print datetime.datetime(**t).strftime('%Y-%m-%d %H:%M:%S')
 
+#给你两个时间st和et(00:00:00<=st <= et<=23:59:59), 请你给出这两个时间间隔的秒数。
+#如：st="00:00:00", et="00:00:10", 则输出10.
+def test13():
+
+    #解法2
+    import datetime
+
+    st=datetime.datetime.strptime(st,"%H:%M:%S")
+    et=datetime.datetime.strptime(et,"%H:%M:%S")
+    print (et-st).seconds
+
+#给你一个字符串a和一个正整数n,判断a中是否存在长度为n的回文子串。如果存在，则输出YES，否则输出NO。
+#回文串的定义：记串str逆序之后的字符串是str1，若str=str1,则称str是回文串，如"abcba".
+def test14():
+
+    print('YES' if [i for i in range(len(a)-n+1) if a[i:(i+n)] == a[i:(i+n)][::-1]] else 'NO')
+
+#给你一个整数组成的列表L，按照下列条件输出：
+# 若L是升序排列的,则输出"UP";
+# 若L是降序排列的,则输出"DOWN";
+# 若L无序，则输出"WRONG"。
+
+def test15():
+    #解法2
+    if L == sorted(L):
+        print 'UP'
+    elif L[::-1] == sorted(L):
+        print 'DOWN'
+    else:
+        print 'WRONG'
+
+    #解法3
+    print L == sorted(L) and 'UP' or L == (sorted(L)[::-1]) and 'DOWN' or 'WRONG'
+
+# 给你一个整数列表L,判断L中是否存在相同的数字，
+# 若存在，输出YES，否则输出NO。
+def test16():
+    L = [3, 3, 8, 3, 22, 3, 9, 19, 1, 83]
+    print 'No' if len(L) == len(set(L)) else 'Yes'
+
+#给你三个整数a,b,c,  判断能否以它们为三个边长构成三角形。
+#若能，输出YES，否则输出NO。
+def test17():
+    #解法1
+    print sorted([a,b,c])[0] + sorted([a,b,c])[1] > sorted([a,b,c])[2] and 'YES' or 'NO'
+
+    #解法2
+    a+b+c-max(a,b,c）*2>0  #太赞了 真是好办法
+
+
+
+
 if __name__ == '__main__':
     # test01()
     # test02()
@@ -247,5 +299,6 @@ if __name__ == '__main__':
     # test07()
     # test08()
     # test09()
-    test10()
-    test11()
+    # test10()
+    # test11()
+    pass
