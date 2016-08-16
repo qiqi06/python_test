@@ -289,6 +289,215 @@ def test17():
     a+b+c-max(a,b,c）*2>0  #太赞了 真是好办法
 
 
+#十一假期,小P出去爬山,爬山的过程中每隔10米他都会记录当前点的海拔高度(以一个浮点数表示),
+# 这些值序列保存在一个由浮点数组成的列表h中。回到家中，小P想研究一下自己经过了几个山峰，请你帮他计算一下，输出结果。
+# 例如：h=[0.9,1.2,1.22,1.1,1.6,0.99], 将这些高度顺序连线，会发现有两个山峰，故输出一个2(序列两端不算山峰)
+def test18():
+    h=[0.9,1.2,1.22,1.1,1.6,0.99]
+    print sum([1 for i in xrange(1, len(h) - 1) if h[i] > h[i - 1] and h[i] > h[i + 1]])
+
+    #解法2
+    sum = 0
+    h=[0.9,1.2,1.22,1.1,1.6,0.99, 4, 1]
+    for i in range(1, len(h)-1):
+        #列表得从1开始
+        if h[i] > h[i-1] and h[i] > h[i+1]:
+            sum += 1
+    print sum
+
+#给以一个三角形的三边长a,b和c(边长是浮点数),请你判断三角形的形状。
+# 若是锐角三角形，输出R,
+# 若是直角三角形，输出Z，
+# 若是钝角三角形，输出D，
+# 若三边长不能构成三角形，输出W.
+
+def test20():
+    L = [a, b, c]
+    L.sort()
+    if L[0]+L[1] <= L[2]:
+        print 'W'
+    else:
+        if L[0]*L[0] + L[1]*L[1] == L[2]*L[2]:
+            print 'Z'
+        elif L[0]*L[0]+ L[1]*L[1] > L[2]*L[2]:
+            print 'R'
+        else:
+            print 'D'
+
+    #解法2
+    a,b,c = sorted([a,b,c])
+    print a+b<c and 'W' or a*a + b*b - c*c < 0 and 'D' or a*a + b*b - c*c == 0 and 'Z'or 'R'
+
+#给你两个正整数a(0 < a < 100000)和n(0 <= n <=100000000000)，计算(a^n) % 20132013并输出结果
+def test21():
+    print pow(a, n, 20132013)
+
+
+#生活在当代社会，我们要记住很多密码，银行卡，qq，人人，微博，邮箱等等。小P经过一番思索之后，发明了下面这种生成密码方法：
+# 给定两个正整数a和b, 利用a / b我们会到的一个长度无限的小数(若a / b不是无限小数，
+# 比如1/2=0.5,我们认为0.5是0.5000000...，同样将其看做无限长的小数），小P将该小数点后第x位到第y位的数字
+# 当做密码，这样，无论密码有多长，小P只要记住a,b,x,y四个数字就可以了，牢记密码再也不是那么困难的事情了。
+# 现在告诉你a,b,x,y（0 < a,b <= 20132013, 0 < x <= y < 100000000000),请你输出密码。
+# 例如：a = 1, b = 2, x = 1, y = 4, 则 a / b = 0.5000000..., 输出小数点后第1到4位数字，即5000
+def test22():
+    a = 1
+    b = 2
+    x = 1
+    y = 4
+    from __future__ import print_function
+    list, ans, a = [], [], a%b
+    while (a, b) not in list:
+        list.append((a, b))
+        if a < b:
+            ans.append(0)
+        else:
+            ans.append(a // b)
+            a = a % b
+        a *= 10
+    nolooplen = list.index((a, b))
+    looplen = len(ans) - nolooplen
+    # print(list, ans, nolooplen, looplen)
+    for i in range(x, y + 1):
+        if i < len(ans):
+            print(ans[i], end='')
+        else:
+            print(ans[(i - nolooplen) % looplen + nolooplen], end='')
+    print('')
+
+# 给你一个整数list L, 如 L=[2,-3,3,50], 求L的一个连续子序列，使其和最大，输出最大子序列的和。
+# 例如，对于L=[2,-3,3,50]， 输出53（分析：很明显，该列表最大连续子序列为[3,50]).
+def test23():
+    #能够想到设计一个以第j处结束的子序列的最大和数组b[j]。这也是一种巧妙的遍历.
+
+    # 设b[j]表示以a[j] 结尾的子序列的最大和。
+    #        则b[j] = max(a[j] + b[j-1] , a[j]) ，
+
+    # 代码如下：
+    L=[2,-3,3,50]
+    B=[0 for i in range(len(L))]B[0]=L[0]
+    for i in range(1,len(L)):
+        B[i]=max(B[i-1]+L[i],L[i])
+    print max(B)
+
+# 给你直角三角形的两个直角边的边长a,b,请你求出其斜边边长，结果保留小数点后三位小数。
+# 如a=3, b =4, 则输出5.000。
+def test24():
+    import math
+    a, b = 3, 4
+    c = math.sqrt(pow(a, 2) + pow(b, 2))
+    print '%.3f' %c
+
+# 给你两个整数a和b（-10000<a,b<10000），请你判断是否存在两个整数，他们的和为a，乘积为b。
+# 若存在，输出Yes,否则输出No
+# 例如：a=9,b=15, 此时不存在两个整数满足上述条件，所以应该输出No。
+def test25():
+    import random
+    a = random.randint(-10000, 10000)
+    b = random.randint(-10000, 10000)
+    a, b = sorted([a, b])
+    print a, b
+
+# Py从小喜欢奇特的东西，而且天生对数字特别敏感，一次偶然的机会，他发现了一个有趣的四位数2992，
+# 这个数，它的十进制数表示，其四位数字之和为2+9+9+2=22，它的十六进制数BB0，其四位数字之和也为22，
+# 同时它的十二进制数表示1894，其四位数字之和也为22，啊哈，真是巧啊。
+# Py非常喜欢这种四位数，由于他的发现，所以这里我们命名其为Py数。
+# 现在给你一个十进制4位数n，你来判断n是不是Py数，若是，则输出Yes，否则输出No。
+# 如n=2992，则输出Yes； n = 9999，则输出No
+
+def test26():
+    a = 0
+    tmp = n
+    while tmp:
+	    a += tmp % 12
+	    tmp //= 12
+
+    b = 0
+    tmp = n
+    while tmp:
+        b += tmp % 10
+        tmp //= 10
+
+    c = 0
+    tmp = n
+    while tmp:
+        c += tmp % 16
+        tmp //= 16
+
+    if a == b and b == c:
+        print("Yes")
+    else:
+        print("No")
+
+    #解法2
+    def conv(n,m):
+    temp = []
+    while n != 0:
+         temp.append(n % m)
+         n = n / m
+    return sum(temp)
+
+    print conv(n,16) == conv(n,12) == conv(n,10) and 'Yes'or 'No'
+
+
+#
+def test27():
+    def list_test(x):
+        a = b = 1
+        for i in xrange(x):
+            yield a
+            a , b = b, a + b
+
+    list1 = []
+    for i in list_test(n+1):
+        list1.append(i)
+    print list1[n - 1] % 20132013
+
+# 有一楼梯共n级，刚开始时你在第一级，若每次只能跨上一级或二级，要走上第n级，共有多少种走法？
+# 现在给你一个正整数n（0<n<40),请你输出不同的走法数。
+# 如n=2,则输出1（你只有一种走法，走一步，从第一级到第二级）
+
+def test28():
+    pass
+
+# 给你一个十进制数a，将它转换成b进制数,如果b>10,用大写字母表示（10用A表示，等等）
+# a为32位整数，2 <= b <= 16
+# 如a=3,b = 2, 则输出11
+
+def test29():
+    a = 3
+    b = 16
+
+    #解法1
+    sign = '0123456789ABCEDF'
+    ans = ""
+    flag = 0
+    if a < 0:
+        flag = 1
+        a = -a
+
+    while a > 0:
+        ans += sign[a%b]
+        a //= b
+    if flag:
+        ans += '-'
+    print(ans[::-1])
+
+
+    #解法2
+    d = '0123456789ABCEDFGHIJKLMNOPQRSTUVWXYZ'
+    def f(x,y):
+        s = []
+        while x>=y:
+            s.append(x%y)
+            x /=y
+        s.append(x)
+        return ''.join([d[c] for c in s[::-1]])
+
+    print (a<0 and '-' or '')+f(abs(a),b)
+
+
+
+
 
 
 if __name__ == '__main__':
