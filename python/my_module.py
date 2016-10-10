@@ -325,6 +325,9 @@ print sorted(['bob', 'about', 'Zoo', 'Credit'], cmp_ignore_case)
         pdb.set_trace()
         return 'I do not have time'
 
+
+
+
     #多条件判断
     #all(True, False, True),结果为False
     #any(True, False, True), 结果为True
@@ -409,6 +412,15 @@ print sorted(['bob', 'about', 'Zoo', 'Credit'], cmp_ignore_case)
       print ([x * (x + 1) for x in range(1, 100, 1)])
       print ([x * x for x in range(1, 11) if x % 2 == 0])
       print ([m + n for m in 'ABC' for n in '123'])
+
+    #enumerate用法
+    print list(enumerate('abc', 1))
+
+    #字典
+    print {i: i * 3 for i in xrange(10)}
+    #集合
+    print {i * 15 for i in range(3, 9)}
+
 
 
     #计数
