@@ -260,6 +260,12 @@ class My_module(object):
             print "".join(string1)
             # print "\n"
 
+    #生成10个随机数
+    def randint10():
+        import random
+        date = [random.randint(-10, 10) for _ in xrange(10)]
+        print date
+
     #字母变小写
     def format_name(s):
         return s[0].upper()+s[1:].lower()
